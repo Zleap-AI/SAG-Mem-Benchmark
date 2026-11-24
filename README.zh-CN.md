@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/zleap-logo.svg" alt="Zleap AI" width="120" />
+  <img src="assets/zleap-logo.svg" alt="Zleap AI" width="180" />
 </p>
 
 <h1 align="center">SAG-Mem</h1>
