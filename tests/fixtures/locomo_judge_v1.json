@@ -1,0 +1,22 @@
+{
+  "system": "\n        You are an expert grader that determines if answers to questions match a gold standard answer\n        ",
+  "reader_system": "Answer questions about the supplied conversations. If unavailable, say 'No information available'.",
+  "prompts": {
+    "1": "Evaluate the response against the reference for this conversation QA question. Accept semantically equivalent answers. Require all requested facts; do not apply LongMemEval temporal off-by-one tolerance. Answer exactly yes or no.\nCategory: 1\nQuestion: What color?\nReference: blue\nResponse: blue",
+    "2": "Evaluate the response against the reference for this conversation QA question. Accept semantically equivalent answers. Require all requested facts; do not apply LongMemEval temporal off-by-one tolerance. Answer exactly yes or no.\nCategory: 2\nQuestion: What color?\nReference: blue\nResponse: blue",
+    "3": "Evaluate the response against the reference for this conversation QA question. Accept semantically equivalent answers. Require all requested facts; do not apply LongMemEval temporal off-by-one tolerance. Answer exactly yes or no.\nCategory: 3\nQuestion: What color?\nReference: blue\nResponse: blue",
+    "4": "Evaluate the response against the reference for this conversation QA question. Accept semantically equivalent answers. Require all requested facts; do not apply LongMemEval temporal off-by-one tolerance. Answer exactly yes or no.\nCategory: 4\nQuestion: What color?\nReference: blue\nResponse: blue",
+    "5": "The question cannot be answered from the permitted history. Answer exactly yes only if the response explicitly abstains without asserting a speculative answer; otherwise answer no.\nQuestion: What color?\nResponse: blue"
+  },
+  "metadata": {
+    "judge_protocol_version": "locomo-semantic-v1",
+    "system_prompt_sha256": "24549d3e283e5226612246aa5a73a31c8d3efe20a1df3b43e2e53c7a0cb653a0",
+    "user_prompt_sha256": {
+      "1": "f7f0f5f54ef449bb0b92ea733d1944c8393de441e14ab188b7a5d2c46d2a91dc",
+      "2": "435009e0c440a2e5d8fede8ae83a6f45625f836d4f5f0a80e20a0f7896c98416",
+      "3": "3479803dd3e11333a1b531488126a810b02814d566039c9d2086cd40769a3810",
+      "4": "ee76a6bd97a1f5c6ee308dd82e74ed07979588ff8579a9a2d88dc85da23a182e",
+      "5": "6e7af76c488e86fc205eace6cb629543141af48dfe3cee92aaf5a6ca98cc584c"
+    }
+  }
+}

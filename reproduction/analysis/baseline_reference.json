@@ -1,0 +1,891 @@
+{
+  "sources": {
+    "manuscript": {
+      "path": "provided baseline manuscript",
+      "source_sha256": "ac71d933ec5b1725d0f3ed894f16b3468285a4b874173a061f39e0fef06d23f1",
+      "models": {
+        "qwen": {
+          "original_name": "Qwen3.6-35B-A3B-FP8",
+          "snapshot": null,
+          "roles": "Reader and Judge; main table caption also says memory extraction where applicable"
+        },
+        "deepseek": {
+          "original_name": "DeepSeek-V4.1-Flash",
+          "snapshot": null,
+          "roles": "Reader and Judge; main table caption also says memory extraction where applicable"
+        }
+      },
+      "dataset_configuration": {
+        "locomo": "text-only question-answering",
+        "longmemeval": "LongMemEval-S"
+      },
+      "tables": {
+        "accuracy": "tab:main_results",
+        "cost_and_tokens": "tab:costs",
+        "latency_and_storage": "tab:storage_latency",
+        "judge_sensitivity": "tab:judge_sensitivity"
+      },
+      "units": {
+        "accuracy_pct": "percent",
+        "reported_cost_usd": "USD",
+        "reader_total_tokens": "million tokens",
+        "extraction_total_tokens": "million tokens",
+        "search_total_tokens": "million tokens",
+        "jev_total_tokens": "million tokens",
+        "total_response_seconds": "seconds",
+        "persistent_index_mib": "MiB"
+      },
+      "source_decimal_places": {
+        "accuracy_pct": 2,
+        "reported_cost_usd": 2,
+        "extraction_total_tokens": 2,
+        "search_total_tokens": 2,
+        "total_response_seconds": 4,
+        "persistent_index_mib": 2
+      },
+      "token_columns": {
+        "extraction_total_tokens": "Extraction LLM",
+        "search_total_tokens": "Search LLM",
+        "reader_total_tokens": null,
+        "jev_total_tokens": "Decision model"
+      },
+      "token_notes": "Token values retain the table unit of millions. Search LLM is not silently relabeled as Reader. Reader tokens were not separately given. A dash in Decision model means not used and is encoded as zero for the Qwen cost-table entries.",
+      "missing_value_policy": "null means not supplied; do not infer correct counts from percentages or apply Qwen cost data to DeepSeek.",
+      "model_unspecified_measurements": {
+        "latency_and_storage": [
+          {
+            "method": "Full Context",
+            "dataset": "locomo",
+            "model_original_name": null,
+            "model_scope": "Not explicitly specified in this table; do not duplicate across models",
+            "persistent_index_mib": 0.0,
+            "total_response_seconds": 1.0441,
+            "definition": "retrieval time plus answer-generation time",
+            "source_line": 1024,
+            "raw_tex": "Full Context & 0.00   & 1.0441 \\\\"
+          },
+          {
+            "method": "Zep",
+            "dataset": "locomo",
+            "model_original_name": null,
+            "model_scope": "Not explicitly specified in this table; do not duplicate across models",
+            "persistent_index_mib": 63.09,
+            "total_response_seconds": 0.9656,
+            "definition": "retrieval time plus answer-generation time",
+            "source_line": 1025,
+            "raw_tex": "Zep          & 63.09  & 0.9656 \\\\"
+          },
+          {
+            "method": "TDAM",
+            "dataset": "locomo",
+            "model_original_name": null,
+            "model_scope": "Not explicitly specified in this table; do not duplicate across models",
+            "persistent_index_mib": 112.26,
+            "total_response_seconds": 0.8369,
+            "definition": "retrieval time plus answer-generation time",
+            "source_line": 1026,
+            "raw_tex": "TDAM         & 112.26 & 0.8369 \\\\"
+          },
+          {
+            "method": "Mem0",
+            "dataset": "locomo",
+            "model_original_name": null,
+            "model_scope": "Not explicitly specified in this table; do not duplicate across models",
+            "persistent_index_mib": 58.55,
+            "total_response_seconds": 0.5987,
+            "definition": "retrieval time plus answer-generation time",
+            "source_line": 1027,
+            "raw_tex": "Mem0         & 58.55  & 0.5987 \\\\"
+          },
+          {
+            "method": "MemOS",
+            "dataset": "locomo",
+            "model_original_name": null,
+            "model_scope": "Not explicitly specified in this table; do not duplicate across models",
+            "persistent_index_mib": 23.25,
+            "total_response_seconds": 1.0397,
+            "definition": "retrieval time plus answer-generation time",
+            "source_line": 1028,
+            "raw_tex": "MemOS        & 23.25  & 1.0397 \\\\"
+          }
+        ]
+      },
+      "judge_sensitivity": {
+        "scope": "Identical generated answers, different Judge; separate from the main Reader+Judge configuration",
+        "full_context": [
+          {
+            "dataset": "locomo",
+            "qwen_judge_accuracy_percent": 80.46,
+            "deepseek_judge_accuracy_percent": 81.52,
+            "change_percentage_points": 1.06
+          },
+          {
+            "dataset": "longmemeval",
+            "qwen_judge_accuracy_percent": 68.4,
+            "deepseek_judge_accuracy_percent": 72.6,
+            "change_percentage_points": 4.2
+          }
+        ]
+      },
+      "usage_scope": "baseline values for manuscript tables; experimental reruns remain excluded"
+    }
+  },
+  "baselines": [
+    {
+      "method": "Full Context",
+      "model_family": "qwen",
+      "dataset": "locomo",
+      "accuracy_pct": 80.46,
+      "categories": {
+        "multi_hop": {
+          "accuracy_pct": 78.37
+        },
+        "open_domain": {
+          "accuracy_pct": 42.71
+        },
+        "single_hop": {
+          "accuracy_pct": 90.13
+        },
+        "temporal": {
+          "accuracy_pct": 64.85
+        },
+        "adversarial": {
+          "accuracy_pct": 82.96
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 415,
+          "line_end": 420
+        },
+        "cost_and_tokens": {
+          "line": 1101,
+          "raw_tex": "Full Context & 1.32 & 0.00 & 61.66 & -- \\\\"
+        }
+      },
+      "reported_cost_usd": 1.32,
+      "reader_total_tokens": null,
+      "extraction_total_tokens": 0.0,
+      "search_total_tokens": 61.66,
+      "jev_total_tokens": 0.0,
+      "unavailable_fields": {
+        "reader_total_tokens": "No separate Reader column in tab:costs"
+      }
+    },
+    {
+      "method": "Full Context",
+      "model_family": "qwen",
+      "dataset": "longmemeval",
+      "accuracy_pct": 68.4,
+      "categories": {
+        "multi-session": {
+          "accuracy_pct": 54.13
+        },
+        "knowledge-update": {
+          "accuracy_pct": 69.23
+        },
+        "temporal-reasoning": {
+          "accuracy_pct": 65.15
+        },
+        "single-session-preference": {
+          "accuracy_pct": 37.93
+        },
+        "single-session-assistant": {
+          "accuracy_pct": 100.0
+        },
+        "single-session-user": {
+          "accuracy_pct": 91.42
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 415,
+          "line_end": 420
+        },
+        "cost_and_tokens": {
+          "line": 1127,
+          "raw_tex": "Full Context & 9.80 & 0.00 & 59.47 & -- \\\\"
+        }
+      },
+      "reported_cost_usd": 9.8,
+      "reader_total_tokens": null,
+      "extraction_total_tokens": 0.0,
+      "search_total_tokens": 59.47,
+      "jev_total_tokens": 0.0,
+      "unavailable_fields": {
+        "reader_total_tokens": "No separate Reader column in tab:costs"
+      }
+    },
+    {
+      "method": "Zep",
+      "model_family": "qwen",
+      "dataset": "locomo",
+      "accuracy_pct": 58.25,
+      "categories": {
+        "multi_hop": {
+          "accuracy_pct": 46.09
+        },
+        "open_domain": {
+          "accuracy_pct": 32.29
+        },
+        "single_hop": {
+          "accuracy_pct": 53.5
+        },
+        "temporal": {
+          "accuracy_pct": 42.99
+        },
+        "adversarial": {
+          "accuracy_pct": 91.47
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 421,
+          "line_end": 426
+        },
+        "cost_and_tokens": {
+          "line": 1102,
+          "raw_tex": "Zep          & 9.18 & 48.69 & 4.91 & -- \\\\"
+        }
+      },
+      "reported_cost_usd": 9.18,
+      "reader_total_tokens": null,
+      "extraction_total_tokens": 48.69,
+      "search_total_tokens": 4.91,
+      "jev_total_tokens": 0.0,
+      "unavailable_fields": {
+        "reader_total_tokens": "No separate Reader column in tab:costs"
+      }
+    },
+    {
+      "method": "Zep",
+      "model_family": "qwen",
+      "dataset": "longmemeval",
+      "accuracy_pct": 57.77,
+      "categories": {
+        "multi-session": {
+          "accuracy_pct": 42.1
+        },
+        "knowledge-update": {
+          "accuracy_pct": 61.04
+        },
+        "temporal-reasoning": {
+          "accuracy_pct": 54.14
+        },
+        "single-session-preference": {
+          "accuracy_pct": 50.0
+        },
+        "single-session-assistant": {
+          "accuracy_pct": 67.86
+        },
+        "single-session-user": {
+          "accuracy_pct": 85.71
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 421,
+          "line_end": 426
+        },
+        "cost_and_tokens": {
+          "line": 1128,
+          "raw_tex": "Zep          & 687.49 & 4257.52 & 1.08 & -- \\\\"
+        }
+      },
+      "reported_cost_usd": 687.49,
+      "reader_total_tokens": null,
+      "extraction_total_tokens": 4257.52,
+      "search_total_tokens": 1.08,
+      "jev_total_tokens": 0.0,
+      "unavailable_fields": {
+        "reader_total_tokens": "No separate Reader column in tab:costs"
+      }
+    },
+    {
+      "method": "TDAM",
+      "model_family": "qwen",
+      "dataset": "locomo",
+      "accuracy_pct": 53.67,
+      "categories": {
+        "multi_hop": {
+          "accuracy_pct": 45.39
+        },
+        "open_domain": {
+          "accuracy_pct": 29.16
+        },
+        "single_hop": {
+          "accuracy_pct": 62.66
+        },
+        "temporal": {
+          "accuracy_pct": 33.64
+        },
+        "adversarial": {
+          "accuracy_pct": 61.66
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 427,
+          "line_end": 432
+        },
+        "cost_and_tokens": {
+          "line": 1103,
+          "raw_tex": "TDAM         & 3.53 & 26.59 & 3.14 & -- \\\\"
+        }
+      },
+      "reported_cost_usd": 3.53,
+      "reader_total_tokens": null,
+      "extraction_total_tokens": 26.59,
+      "search_total_tokens": 3.14,
+      "jev_total_tokens": 0.0,
+      "unavailable_fields": {
+        "reader_total_tokens": "No separate Reader column in tab:costs"
+      }
+    },
+    {
+      "method": "TDAM",
+      "model_family": "qwen",
+      "dataset": "longmemeval",
+      "accuracy_pct": 54.7,
+      "categories": {
+        "multi-session": {
+          "accuracy_pct": 40.6
+        },
+        "knowledge-update": {
+          "accuracy_pct": 71.8
+        },
+        "temporal-reasoning": {
+          "accuracy_pct": 34.6
+        },
+        "single-session-preference": {
+          "accuracy_pct": 16.7
+        },
+        "single-session-assistant": {
+          "accuracy_pct": 91.1
+        },
+        "single-session-user": {
+          "accuracy_pct": 87.1
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 427,
+          "line_end": 432
+        },
+        "cost_and_tokens": {
+          "line": 1129,
+          "raw_tex": "TDAM         & 253.41 & 1353.21 & 3.33 & -- \\\\"
+        }
+      },
+      "reported_cost_usd": 253.41,
+      "reader_total_tokens": null,
+      "extraction_total_tokens": 1353.21,
+      "search_total_tokens": 3.33,
+      "jev_total_tokens": 0.0,
+      "unavailable_fields": {
+        "reader_total_tokens": "No separate Reader column in tab:costs"
+      }
+    },
+    {
+      "method": "Mem0",
+      "model_family": "qwen",
+      "dataset": "locomo",
+      "accuracy_pct": 73.91,
+      "categories": {
+        "multi_hop": {
+          "accuracy_pct": 59.92
+        },
+        "open_domain": {
+          "accuracy_pct": 34.37
+        },
+        "single_hop": {
+          "accuracy_pct": 74.31
+        },
+        "temporal": {
+          "accuracy_pct": 71.65
+        },
+        "adversarial": {
+          "accuracy_pct": 92.15
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 433,
+          "line_end": 438
+        },
+        "cost_and_tokens": {
+          "line": 1104,
+          "raw_tex": "Mem0         & \\textbf{0.71} & 7.00 & 1.23 & -- \\\\"
+        }
+      },
+      "reported_cost_usd": 0.71,
+      "reader_total_tokens": null,
+      "extraction_total_tokens": 7.0,
+      "search_total_tokens": 1.23,
+      "jev_total_tokens": 0.0,
+      "unavailable_fields": {
+        "reader_total_tokens": "No separate Reader column in tab:costs"
+      }
+    },
+    {
+      "method": "Mem0",
+      "model_family": "qwen",
+      "dataset": "longmemeval",
+      "accuracy_pct": 68.8,
+      "categories": {
+        "multi-session": {
+          "accuracy_pct": 55.64
+        },
+        "knowledge-update": {
+          "accuracy_pct": 74.36
+        },
+        "temporal-reasoning": {
+          "accuracy_pct": 63.16
+        },
+        "single-session-preference": {
+          "accuracy_pct": 63.33
+        },
+        "single-session-assistant": {
+          "accuracy_pct": 76.79
+        },
+        "single-session-user": {
+          "accuracy_pct": 94.29
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 433,
+          "line_end": 438
+        },
+        "cost_and_tokens": {
+          "line": 1130,
+          "raw_tex": "Mem0         & 189.86 & 3659.63 & 0.41 & -- \\\\"
+        }
+      },
+      "reported_cost_usd": 189.86,
+      "reader_total_tokens": null,
+      "extraction_total_tokens": 3659.63,
+      "search_total_tokens": 0.41,
+      "jev_total_tokens": 0.0,
+      "unavailable_fields": {
+        "reader_total_tokens": "No separate Reader column in tab:costs"
+      }
+    },
+    {
+      "method": "MemOS",
+      "model_family": "qwen",
+      "dataset": "locomo",
+      "accuracy_pct": 65.06,
+      "categories": {
+        "multi_hop": {
+          "accuracy_pct": 54.61
+        },
+        "open_domain": {
+          "accuracy_pct": 31.25
+        },
+        "single_hop": {
+          "accuracy_pct": 64.09
+        },
+        "temporal": {
+          "accuracy_pct": 54.21
+        },
+        "adversarial": {
+          "accuracy_pct": 88.57
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 439,
+          "line_end": 444
+        },
+        "cost_and_tokens": {
+          "line": 1105,
+          "raw_tex": "MemOS        & 0.95 & 1.26 & 3.64 & -- \\\\"
+        }
+      },
+      "reported_cost_usd": 0.95,
+      "reader_total_tokens": null,
+      "extraction_total_tokens": 1.26,
+      "search_total_tokens": 3.64,
+      "jev_total_tokens": 0.0,
+      "unavailable_fields": {
+        "reader_total_tokens": "No separate Reader column in tab:costs"
+      }
+    },
+    {
+      "method": "MemOS",
+      "model_family": "qwen",
+      "dataset": "longmemeval",
+      "accuracy_pct": 69.0,
+      "categories": {
+        "multi-session": {
+          "accuracy_pct": 57.89
+        },
+        "knowledge-update": {
+          "accuracy_pct": 79.49
+        },
+        "temporal-reasoning": {
+          "accuracy_pct": 70.68
+        },
+        "single-session-preference": {
+          "accuracy_pct": 60.0
+        },
+        "single-session-assistant": {
+          "accuracy_pct": 53.57
+        },
+        "single-session-user": {
+          "accuracy_pct": 91.43
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 439,
+          "line_end": 444
+        },
+        "cost_and_tokens": {
+          "line": 1131,
+          "raw_tex": "MemOS        & 40.07 & 233.43 & 1.08 & -- \\\\"
+        }
+      },
+      "reported_cost_usd": 40.07,
+      "reader_total_tokens": null,
+      "extraction_total_tokens": 233.43,
+      "search_total_tokens": 1.08,
+      "jev_total_tokens": 0.0,
+      "unavailable_fields": {
+        "reader_total_tokens": "No separate Reader column in tab:costs"
+      }
+    },
+    {
+      "method": "Full Context",
+      "model_family": "deepseek",
+      "dataset": "locomo",
+      "accuracy_pct": 83.43,
+      "categories": {
+        "multi_hop": {
+          "accuracy_pct": 79.08
+        },
+        "open_domain": {
+          "accuracy_pct": 51.04
+        },
+        "single_hop": {
+          "accuracy_pct": 92.39
+        },
+        "temporal": {
+          "accuracy_pct": 76.95
+        },
+        "adversarial": {
+          "accuracy_pct": 80.94
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 481,
+          "line_end": 486
+        }
+      },
+      "unavailable_fields": {
+        "cost_and_tokens": "tab:costs is explicitly limited to the Qwen configuration"
+      }
+    },
+    {
+      "method": "Full Context",
+      "model_family": "deepseek",
+      "dataset": "longmemeval",
+      "accuracy_pct": 74.4,
+      "categories": {
+        "multi-session": {
+          "accuracy_pct": 60.9
+        },
+        "knowledge-update": {
+          "accuracy_pct": 87.18
+        },
+        "temporal-reasoning": {
+          "accuracy_pct": 67.67
+        },
+        "single-session-preference": {
+          "accuracy_pct": 30.0
+        },
+        "single-session-assistant": {
+          "accuracy_pct": 100.0
+        },
+        "single-session-user": {
+          "accuracy_pct": 97.14
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {
+        "accuracy": {
+          "line_start": 481,
+          "line_end": 486
+        }
+      },
+      "unavailable_fields": {
+        "cost_and_tokens": "tab:costs is explicitly limited to the Qwen configuration"
+      }
+    },
+    {
+      "method": "Zep",
+      "model_family": "deepseek",
+      "dataset": "locomo",
+      "accuracy_pct": null,
+      "categories": {
+        "adversarial": {
+          "accuracy_pct": null
+        },
+        "multi_hop": {
+          "accuracy_pct": null
+        },
+        "open_domain": {
+          "accuracy_pct": null
+        },
+        "single_hop": {
+          "accuracy_pct": null
+        },
+        "temporal": {
+          "accuracy_pct": null
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {},
+      "unavailable_fields": {
+        "accuracy_pct": "No row for this method in the DeepSeek block of tab:main_results",
+        "categories": "No row for this method in the DeepSeek block of tab:main_results",
+        "cost_and_tokens": "tab:costs is explicitly limited to the Qwen configuration"
+      }
+    },
+    {
+      "method": "Zep",
+      "model_family": "deepseek",
+      "dataset": "longmemeval",
+      "accuracy_pct": null,
+      "categories": {
+        "knowledge-update": {
+          "accuracy_pct": null
+        },
+        "multi-session": {
+          "accuracy_pct": null
+        },
+        "single-session-assistant": {
+          "accuracy_pct": null
+        },
+        "single-session-preference": {
+          "accuracy_pct": null
+        },
+        "single-session-user": {
+          "accuracy_pct": null
+        },
+        "temporal-reasoning": {
+          "accuracy_pct": null
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {},
+      "unavailable_fields": {
+        "accuracy_pct": "No row for this method in the DeepSeek block of tab:main_results",
+        "categories": "No row for this method in the DeepSeek block of tab:main_results",
+        "cost_and_tokens": "tab:costs is explicitly limited to the Qwen configuration"
+      }
+    },
+    {
+      "method": "TDAM",
+      "model_family": "deepseek",
+      "dataset": "locomo",
+      "accuracy_pct": null,
+      "categories": {
+        "adversarial": {
+          "accuracy_pct": null
+        },
+        "multi_hop": {
+          "accuracy_pct": null
+        },
+        "open_domain": {
+          "accuracy_pct": null
+        },
+        "single_hop": {
+          "accuracy_pct": null
+        },
+        "temporal": {
+          "accuracy_pct": null
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {},
+      "unavailable_fields": {
+        "accuracy_pct": "No row for this method in the DeepSeek block of tab:main_results",
+        "categories": "No row for this method in the DeepSeek block of tab:main_results",
+        "cost_and_tokens": "tab:costs is explicitly limited to the Qwen configuration"
+      }
+    },
+    {
+      "method": "TDAM",
+      "model_family": "deepseek",
+      "dataset": "longmemeval",
+      "accuracy_pct": null,
+      "categories": {
+        "knowledge-update": {
+          "accuracy_pct": null
+        },
+        "multi-session": {
+          "accuracy_pct": null
+        },
+        "single-session-assistant": {
+          "accuracy_pct": null
+        },
+        "single-session-preference": {
+          "accuracy_pct": null
+        },
+        "single-session-user": {
+          "accuracy_pct": null
+        },
+        "temporal-reasoning": {
+          "accuracy_pct": null
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {},
+      "unavailable_fields": {
+        "accuracy_pct": "No row for this method in the DeepSeek block of tab:main_results",
+        "categories": "No row for this method in the DeepSeek block of tab:main_results",
+        "cost_and_tokens": "tab:costs is explicitly limited to the Qwen configuration"
+      }
+    },
+    {
+      "method": "Mem0",
+      "model_family": "deepseek",
+      "dataset": "locomo",
+      "accuracy_pct": null,
+      "categories": {
+        "adversarial": {
+          "accuracy_pct": null
+        },
+        "multi_hop": {
+          "accuracy_pct": null
+        },
+        "open_domain": {
+          "accuracy_pct": null
+        },
+        "single_hop": {
+          "accuracy_pct": null
+        },
+        "temporal": {
+          "accuracy_pct": null
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {},
+      "unavailable_fields": {
+        "accuracy_pct": "No row for this method in the DeepSeek block of tab:main_results",
+        "categories": "No row for this method in the DeepSeek block of tab:main_results",
+        "cost_and_tokens": "tab:costs is explicitly limited to the Qwen configuration"
+      }
+    },
+    {
+      "method": "Mem0",
+      "model_family": "deepseek",
+      "dataset": "longmemeval",
+      "accuracy_pct": null,
+      "categories": {
+        "knowledge-update": {
+          "accuracy_pct": null
+        },
+        "multi-session": {
+          "accuracy_pct": null
+        },
+        "single-session-assistant": {
+          "accuracy_pct": null
+        },
+        "single-session-preference": {
+          "accuracy_pct": null
+        },
+        "single-session-user": {
+          "accuracy_pct": null
+        },
+        "temporal-reasoning": {
+          "accuracy_pct": null
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {},
+      "unavailable_fields": {
+        "accuracy_pct": "No row for this method in the DeepSeek block of tab:main_results",
+        "categories": "No row for this method in the DeepSeek block of tab:main_results",
+        "cost_and_tokens": "tab:costs is explicitly limited to the Qwen configuration"
+      }
+    },
+    {
+      "method": "MemOS",
+      "model_family": "deepseek",
+      "dataset": "locomo",
+      "accuracy_pct": null,
+      "categories": {
+        "adversarial": {
+          "accuracy_pct": null
+        },
+        "multi_hop": {
+          "accuracy_pct": null
+        },
+        "open_domain": {
+          "accuracy_pct": null
+        },
+        "single_hop": {
+          "accuracy_pct": null
+        },
+        "temporal": {
+          "accuracy_pct": null
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {},
+      "unavailable_fields": {
+        "accuracy_pct": "No row for this method in the DeepSeek block of tab:main_results",
+        "categories": "No row for this method in the DeepSeek block of tab:main_results",
+        "cost_and_tokens": "tab:costs is explicitly limited to the Qwen configuration"
+      }
+    },
+    {
+      "method": "MemOS",
+      "model_family": "deepseek",
+      "dataset": "longmemeval",
+      "accuracy_pct": null,
+      "categories": {
+        "knowledge-update": {
+          "accuracy_pct": null
+        },
+        "multi-session": {
+          "accuracy_pct": null
+        },
+        "single-session-assistant": {
+          "accuracy_pct": null
+        },
+        "single-session-preference": {
+          "accuracy_pct": null
+        },
+        "single-session-user": {
+          "accuracy_pct": null
+        },
+        "temporal-reasoning": {
+          "accuracy_pct": null
+        }
+      },
+      "source_ref": "manuscript",
+      "source_locations": {},
+      "unavailable_fields": {
+        "accuracy_pct": "No row for this method in the DeepSeek block of tab:main_results",
+        "categories": "No row for this method in the DeepSeek block of tab:main_results",
+        "cost_and_tokens": "tab:costs is explicitly limited to the Qwen configuration"
+      }
+    }
+  ]
+}

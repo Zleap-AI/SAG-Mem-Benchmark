@@ -1,0 +1,38 @@
+[project]
+name = "sag-mem-paper"
+version = "0.1.0"
+description = "SAG-Mem and SAG-Mem-Lite paper code for LoCoMo and LongMemEval-S."
+requires-python = ">=3.11"
+dependencies = [
+    "zleap-sag2[lance]==0.4.0",
+    "openai==3.45.0",
+    "numpy==2.4.6",
+    "aiohttp==3.14.5",
+    "tokenizers==0.23.3",
+    "pydantic==2.14.2",
+    "python-dotenv>=1.0,<2",
+    "tiktoken>=0.7",
+    "nltk>=3.8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "httpx>=0.27"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "reproduction*", "scripts*"]
+exclude = ["reproduction.tests*"]
+
+[tool.setuptools.package-data]
+"src.backends" = ["tokenizer_assets/*.json", "tokenizer_assets/*.md", "tokenizer_assets/LICENSE"]
+"reproduction.experiments.lite" = ["assets/*", "prices.json"]
+"reproduction.analysis" = ["*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "reproduction"]
+addopts = "--import-mode=importlib"
+asyncio_default_fixture_loop_scope = "function"
